@@ -1,0 +1,18 @@
+#board {
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+    height: 90vh;
+    justify-content: center;
+}
+
+button {
+    font-size: 2em;
+    height: 75px;
+    width: 250px;
+}
+
+.cell {
+    background-color: white;
+    border: thin solid black;
+}
