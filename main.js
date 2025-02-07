@@ -1,6 +1,10 @@
 // @ts-check
 
-const removeGameTypeButtons = function () {
+function resetGame() {
+    location.reload();
+}
+
+function removeGameTypeButtons() {
     if (tbtButton) {
         board?.removeChild(tbtButton);
     }
@@ -9,11 +13,24 @@ const removeGameTypeButtons = function () {
     }
 }
 
-const createGrid = function (N) {
-    const squareHeight = Math.floor(board?.clientHeight / N) - 2;
-    const squareWidth = Math.floor(board?.clientWidth / N) - 2;
+function createGrid(N) {
+    let cellHeight, cellWidth;
+    if (board?.clientHeight && board.clientWidth){
+        cellHeight = Math.floor(board?.clientHeight / N) - 2;
+        cellWidth = Math.floor(board?.clientWidth / N) - 2;
+    }
+    else {
+        cellHeight = 10;
+        cellWidth = 10;
+    }
 
-    const squareSize = ((squareHeight < squareWidth) ? squareHeight : squareWidth).toString() + "px";
+    const squareSize = ((cellHeight < cellWidth) ? cellHeight : cellWidth).toString() + "px";
+
+    let resetButton = document.createElement("button");
+    resetButton.innerText = "Reset";
+    resetButton.setAttribute("class", "button");
+    resetButton.addEventListener("click", resetGame);
+    board?.appendChild(resetButton);
 
     for (let i = 0; i < N; i++) {
         let row = document.createElement("div");
@@ -30,28 +47,28 @@ const createGrid = function (N) {
                 e.preventDefault();
             }
             square.addEventListener("mouseover", (e) => {
-                if(e.buttons === 1) {
+                if (e.buttons === 1) {
                     square.style.backgroundColor = "black";
                 }
             });
             square.addEventListener("mousedown", (e) => {
-                if(e.buttons === 1) {
+                if (e.buttons === 1) {
                     square.style.backgroundColor = "black";
                 }
             });
-            
+
             row.appendChild(square);
         }
         board?.appendChild(row);
     }
 }
 
-const createTurnByTurnGrid = function () {
+function createTurnByTurnGrid() {
     removeGameTypeButtons();
     createGrid(10);
 }
 
-const createRealtimeGrid = function () {
+function createRealtimeGrid() {
     removeGameTypeButtons();
     createGrid(15);
 }
