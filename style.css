@@ -1,6 +1,13 @@
 #board {
     align-items: center;
     display: flex;
+    height: 90vh;
+    justify-content: space-evenly;
+}
+
+#grid {
+    align-items: center;
+    display: flex;
     flex-direction: column;
     height: 90vh;
     justify-content: space-evenly;
@@ -10,6 +17,24 @@ button {
     font-size: 2em;
     height: 75px;
     width: 250px;
+}
+
+#arrowKeys {
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+}
+
+.row {
+    display: flex;
+    justify-content: center;
+}
+
+.arrowKey {
+    font-size: 2em;
+    height: 75px;
+    width: 75px;
 }
 
 .cell {
