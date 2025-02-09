@@ -4,13 +4,16 @@ function resetGame() {
     location.reload();
 }
 
-function removeGameTypeButtons() {
-    if (tbtButton) {
-        board?.removeChild(tbtButton);
-    }
-    if (realtimeButton) {
-        board?.removeChild(realtimeButton);
-    }
+function resetBoard() {
+    board?.replaceChildren();
+}
+
+function addResetButton() {
+    let resetButton = document.createElement("button");
+    resetButton.innerText = "Reset";
+    resetButton.setAttribute("class", "button");
+    resetButton.addEventListener("click", resetGame);
+    board?.appendChild(resetButton);
 }
 
 function createGrid(N) {
@@ -25,12 +28,6 @@ function createGrid(N) {
     }
 
     const squareSize = ((cellHeight < cellWidth) ? cellHeight : cellWidth).toString() + "px";
-
-    let resetButton = document.createElement("button");
-    resetButton.innerText = "Reset";
-    resetButton.setAttribute("class", "button");
-    resetButton.addEventListener("click", resetGame);
-    board?.appendChild(resetButton);
 
     for (let i = 0; i < N; i++) {
         let row = document.createElement("div");
@@ -63,13 +60,15 @@ function createGrid(N) {
     }
 }
 
-function createTurnByTurnGrid() {
-    removeGameTypeButtons();
+function tbtButtonHandler() {
+    resetBoard();
+    addResetButton();
     createGrid(10);
 }
 
-function createRealtimeGrid() {
-    removeGameTypeButtons();
+function realtimeButtonHandler() {
+    resetBoard();
+    addResetButton();
     createGrid(15);
 }
 
@@ -78,8 +77,8 @@ const board = document.querySelector("#board");
 
 /** @type {HTMLButtonElement | null} */
 const tbtButton = document.querySelector("#turnbased");
-tbtButton?.addEventListener("click", createTurnByTurnGrid);
+tbtButton?.addEventListener("click", tbtButtonHandler);
 
 /** @type {HTMLButtonElement | null} */
 const realtimeButton = document.querySelector("#realtime");
-realtimeButton?.addEventListener("click", createRealtimeGrid);
+realtimeButton?.addEventListener("click", realtimeButtonHandler);
