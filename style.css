@@ -39,4 +39,7 @@ button {
 
 .cell {
     border: thin solid black;
+    display: grid;
+    align-items: center;
+    text-align: center;
 }
