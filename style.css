@@ -1,3 +1,23 @@
+p {
+    font-size: 3em;
+}
+
+button {
+    font-size: 2em;
+    height: 75px;
+    width: 150px;
+}
+
+#tbt, #rt {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+}
+
+#tbtButtons, #rtButtons {
+    text-align: center;
+}
+
 #board {
     align-items: center;
     display: flex;
@@ -11,12 +31,6 @@
     flex-direction: column;
     height: 90vh;
     justify-content: space-evenly;
-}
-
-button {
-    font-size: 2em;
-    height: 75px;
-    width: 250px;
 }
 
 #arrowKeys {
