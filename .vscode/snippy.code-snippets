@@ -1,0 +1,10 @@
+{
+	"Add row-column object": {
+		"scope": "javascript,typescript",
+		"prefix": "rowcol",
+		"body":[
+			"{ \"row\": $1, \"col\": $2 },"
+		],
+		"description": "Add a row-column object to represent an island location"
+	}
+}
