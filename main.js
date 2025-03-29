@@ -259,18 +259,43 @@ function moveSilent() {
         const col = parseInt(cell.dataset.col);
 
         if (cell.innerText === "X") {
+            let stopRowPlus = false;
+            let stopRowMinus = false;
+            let stopColPlus = false;
+            let stopColMinus = false;
+
             for (let i = 1; i < 5; i++) {
-                if (row + i < gridSize && gridState[row + i][col] !== "island") {
-                    addElements.push({ "row": row + i, "col": col });
+                if (row + i < gridSize) {
+                    if (gridState[row + i][col] === "island") {
+                        stopRowPlus = true;
+                    }
+                    if (!stopRowPlus) {
+                        addElements.push({ "row": row + i, "col": col });
+                    }
                 }
-                if (row - i >= 0 && gridState[row - i][col] !== "island") {
-                    addElements.push({ "row": row - i, "col": col });
+                if (row - i >= 0) {
+                    if (gridState[row - i][col] === "island") {
+                        stopRowMinus = true;
+                    }
+                    if (!stopRowMinus) {
+                        addElements.push({ "row": row - i, "col": col });
+                    }
                 }
-                if (col + i < gridSize && gridState[row][col + i] !== "island") {
-                    addElements.push({ "row": row, "col": col + i });
+                if (col + i < gridSize) {
+                    if (gridState[row][col + i] === "island") {
+                        stopColPlus = true;
+                    }
+                    if (!stopColPlus) {
+                        addElements.push({ "row": row, "col": col + i });
+                    }
                 }
-                if (col - i >= 0 && gridState[row][col - i] !== "island") {
-                    addElements.push({ "row": row, "col": col - i });
+                if (col - i >= 0) {
+                    if (gridState[row][col - i] === "island") {
+                        stopColMinus = true;
+                    }
+                    if (!stopColMinus) {
+                        addElements.push({ "row": row, "col": col - i });
+                    }
                 }
             }
         }
