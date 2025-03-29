@@ -73,11 +73,35 @@ function createGrid(N, islands) {
 
     const squareSize = ((cellHeight < cellWidth) ? cellHeight : cellWidth).toString() + "px";
 
+    let row = document.createElement("div");
+    row.setAttribute("class", "row");
+
+    const gridLetters = ['', 'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O']
+
+    for (let index = 0; index <= N; index++) {
+        let borderCell = document.createElement("div");
+        borderCell.style.height = squareSize;
+        borderCell.style.width = squareSize;
+        borderCell.setAttribute("class", "borderCell");
+        borderCell.innerText = gridLetters[index];
+
+        row.appendChild(borderCell);
+    }
+    grid?.appendChild(row);
+
     for (let i = 0; i < N; i++) {
         gridState[i] = [];
 
         let row = document.createElement("div");
         row.setAttribute("class", "row");
+
+        let borderCell = document.createElement("div");
+        borderCell.style.height = squareSize;
+        borderCell.style.width = squareSize;
+        borderCell.setAttribute("class", "borderCell");
+        borderCell.innerText = i.toString();
+
+        row.appendChild(borderCell);
 
         for (let j = 0; j < N; j++) {
             gridState[i][j] = "";

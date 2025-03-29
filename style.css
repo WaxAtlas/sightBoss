@@ -51,7 +51,7 @@ button {
     width: 75px;
 }
 
-.cell {
+.cell, .borderCell {
     border: thin solid black;
     display: grid;
     align-items: center;
