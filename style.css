@@ -21,7 +21,7 @@ button {
 #board {
     align-items: center;
     display: flex;
-    height: 90vh;
+    height: 85vh;
     justify-content: space-evenly;
 }
 
@@ -29,7 +29,7 @@ button {
     align-items: center;
     display: flex;
     flex-direction: column;
-    height: 90vh;
+    height: 85vh;
     justify-content: space-evenly;
 }
 
