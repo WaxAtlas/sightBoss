@@ -14,7 +14,7 @@ function addResetButton() {
     grid?.appendChild(resetButton);
 }
 
-function addArrowKeys() {
+function addControls() {
     let upButton = document.createElement("button");
     upButton.innerHTML = "↑";
     upButton.setAttribute("class", "arrowKey");
@@ -35,9 +35,20 @@ function addArrowKeys() {
     rightButton.setAttribute("class", "arrowKey");
     rightButton.addEventListener("click", rightButtonHandler);
 
+    let silentButton = document.createElement("button");
+    silentButton.innerText = "silence";
+    silentButton.addEventListener("click", silentButtonHandler);
+
+    let controlRow = document.createElement("div");
+    controlRow.setAttribute("class", "row");
+    controlRow.append(silentButton);
+
+    arrowKeys?.appendChild(controlRow);
+
     let topRow = document.createElement("div");
     topRow.setAttribute("class", "row");
     topRow?.appendChild(upButton);
+    
     arrowKeys?.appendChild(topRow);
 
     let bottomRow = document.createElement("div");
@@ -45,6 +56,7 @@ function addArrowKeys() {
     bottomRow?.appendChild(leftButton);
     bottomRow?.appendChild(downButton);
     bottomRow?.appendChild(rightButton);
+    
     arrowKeys?.appendChild(bottomRow);
 }
 
@@ -106,7 +118,7 @@ function createGrid(N, islands) {
 function tbtButtonHandler(e) {
     resetBoard();
     addResetButton();
-    addArrowKeys();
+    addControls();
 
     let islands;
     switch (e.currentTarget.innerText) {
@@ -142,7 +154,7 @@ function tbtButtonHandler(e) {
 function rtButtonHandler(e) {
     resetBoard();
     addResetButton();
-    addArrowKeys();
+    addControls();
 
     let islands;
     switch (e.currentTarget.innerText) {
@@ -200,8 +212,8 @@ function updateGrid() {
 }
 
 function updateGridState(addElements, removeElements) {
-    // console.log("addElements", addElements);
-    // console.log("removeElements", removeElements);
+    console.log("addElements", addElements);
+    console.log("removeElements", removeElements);
 
     addElements.forEach(element => {
         gridState[element.row][element.col] = "X";
@@ -211,6 +223,36 @@ function updateGridState(addElements, removeElements) {
     });
 
     updateGrid();
+}
+
+function moveSilent() {
+    let addElements = [];
+    let removeElements = [];
+
+    const cells = document.querySelectorAll(".cell");
+    cells.forEach(cell => {
+        const row = parseInt(cell.dataset.row);
+        const col = parseInt(cell.dataset.col);
+
+        if (cell.innerText === "X") {
+            for (let i = 1; i < 5; i++) {
+                if (row + i < gridSize && gridState[row + i][col] !== "island") {
+                    addElements.push({ "row": row + i, "col": col });
+                }
+                if (row - i >= 0 && gridState[row - i][col] !== "island") {
+                    addElements.push({ "row": row - i, "col": col });
+                }
+                if (col + i < gridSize && gridState[row][col + i] !== "island") {
+                    addElements.push({ "row": row, "col": col + i });
+                }
+                if (col - i >= 0 && gridState[row][col - i] !== "island") {
+                    addElements.push({ "row": row, "col": col - i });
+                }
+            }
+        }
+    });
+
+    updateGridState(addElements, removeElements);
 }
 
 function moveN() {
@@ -339,6 +381,10 @@ function moveW() {
 
 function resetButtonHandler() {
     location.reload();
+}
+
+function silentButtonHandler() {
+    moveSilent();
 }
 
 function upButtonHandler() {
