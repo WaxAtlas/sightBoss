@@ -48,7 +48,7 @@ function addControls() {
     let topRow = document.createElement("div");
     topRow.setAttribute("class", "row");
     topRow?.appendChild(upButton);
-    
+
     arrowKeys?.appendChild(topRow);
 
     let bottomRow = document.createElement("div");
@@ -56,7 +56,7 @@ function addControls() {
     bottomRow?.appendChild(leftButton);
     bottomRow?.appendChild(downButton);
     bottomRow?.appendChild(rightButton);
-    
+
     arrowKeys?.appendChild(bottomRow);
 }
 
@@ -99,7 +99,7 @@ function createGrid(N, islands) {
         borderCell.style.height = squareSize;
         borderCell.style.width = squareSize;
         borderCell.setAttribute("class", "borderCell");
-        borderCell.innerText = i.toString();
+        borderCell.innerText = (i + 1).toString();
 
         row.appendChild(borderCell);
 
